@@ -1,13 +1,17 @@
-# Diecast Collector
+# Diecast Select
 
-Independent static catalog. No checkout, accounts or payment processing.
+Независимый каталог коллекционных моделей. Неофициальный сайт.
 
-## Setup
+## Установка
 
-1. Install Python 3 and run `pip install requests`.
-2. Run `python sync.py` to fetch publicly accessible product information. If the Mattel endpoint rejects requests, the script leaves the existing catalog unchanged. The category handles are illustrative and may need updating.
-3. Run `python -m http.server 8000`, then visit http://localhost:8000.
-4. Click **Управление** to set your EUR prices. Download `prices.json` and replace the site's file to publish prices for all visitors. Browser-only edits are not visible to other visitors.
-5. Publish the directory with GitHub Pages or another static host. GitHub Actions workflow attempts a daily sync (subject to public endpoint availability and access rules).
+Загрузите **содержимое** этой папки в корень публичного репозитория GitHub. Важно загрузить также скрытую папку `.github/workflows` — она отвечает за синхронизацию. В Settings → Pages выберите Deploy from a branch → main → /(root).
 
-Note: The importer has not been live-tested in this environment. Ensure that your use of Mattel's content and images is authorized. Do not present this independent catalog as an official Mattel store.
+## Загрузка моделей
+
+В GitHub откройте Actions → Update Mattel catalog → Run workflow. Затем просмотрите `products.json`. Если он по-прежнему `[]`, публичный интерфейс Mattel не предоставил товары. Скрипт не гарантирует загрузку: доступность и разрешённое использование данных/изображений зависят от Mattel. При успешном запуске обновления выполняются ежедневно.
+
+## Цены
+
+Откройте сайт → Управление → установите цены → Скачать prices.json → замените этот файл в репозитории. Цены на устройстве сохраняются локально, а для всех посетителей обновляются после публикации `prices.json`.
+
+Не вводите пароль от GitHub на сайте каталога. Сайт не принимает оплату.
